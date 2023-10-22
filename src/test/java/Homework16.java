@@ -11,7 +11,8 @@ import java.time.Duration;
 public class Homework16 extends BaseTest{
     @Test
     public void registrationNavigation(){
-        ChromeOptions options= new ChromeOptions();
+        //Added ChromeOptions argument below to fix websocket error
+        ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
 
         // Set up WebDriver and open the website
