@@ -2,10 +2,14 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="TestNG">
-
-    <test name="Example Test" preserve-order="false">
+        <test name="Homework18 Tests" preserve-order="false">
         <classes>
-                       <class name="Homework17"/>
+            <class name="Homework18">
+                <methods>
+                    <include name="loginValidEmailPassword"/>
+                </methods>
+            </class>
         </classes>
     </test>
+
 </suite>
