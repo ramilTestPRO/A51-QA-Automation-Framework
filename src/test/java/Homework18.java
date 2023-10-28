@@ -7,7 +7,13 @@ import org.testng.annotations.Test;
 public class Homework18 extends BaseTest{
 
     public void playNextSong() throws InterruptedException {
-        WebElement playButton =driver.findElement(By.xpath("//*[@id=\"mainFooter\"]/div[1]/i[2]"));
+        WebElement playNextButton =driver.findElement(By.xpath("//*[@id=\"mainFooter\"]/div[1]/i[2]"));
+        playNextButton.click();
+        Thread.sleep(2000);
+
+    }
+    public void playSongButton() throws InterruptedException {
+        WebElement playButton =driver.findElement(By.xpath("//*[@id=\"mainFooter\"]/div[1]/span/span[2]"));
         playButton.click();
         Thread.sleep(2000);
 
@@ -26,6 +32,7 @@ public class Homework18 extends BaseTest{
         clickSubmit();
         Thread.sleep(2000);
         playNextSong();
+        playSongButton();
         isSoundBarDisplayed();
         //driver.wait();
 

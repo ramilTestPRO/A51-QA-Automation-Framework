@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 <suite name="TestNG">
-        <test name="Homework18 Tests" preserve-order="false">
+    <test name="LoginTests Tests" preserve-order="false">
         <classes>
-            <class name="Homework18">
+                        <class name="LoginTests">
                 <methods>
-                    <include name="loginValidEmailPassword"/>
+                    <include name="loginValidEmailPassword" priority="1" />
                 </methods>
             </class>
+                    </classes>
+    </test>
+    <test name="Homework18 Tests" preserve-order="false">
+        <classes>
+            <class name="Homework18"/>
         </classes>
     </test>
-
 </suite>
