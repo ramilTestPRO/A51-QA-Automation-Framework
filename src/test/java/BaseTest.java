@@ -5,35 +5,53 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.*;
 
 import java.time.Duration;
 import java.util.UUID;
+
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+
+
 
 public class BaseTest {
     public WebDriver driver = null;
     public String url = "https://qa.koel.app/";
     @BeforeSuite
+    @DataProvider(name = "LoginData")
+    public static Object[][] getDataFromDataProvider (){
+        return new Object[][]{
+                {"demo@class.com", "te$t$tudent" },
+                {"invalid@class.com", "te$t$tudent" },
+                {"demo@class.com", ""},
+                {" ", " "}
+        };
+    }
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
     }
     @BeforeMethod
-    public void launchBrowser() {
+    @Parameters({"BaseURL"})
+    public void launchBrowser(String BaseURL) {
         //Added ChromeOptions argument below to fix websocket error
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
 
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().window().maximize();
+        //navigateToPage(BaseURL);//url=BaseURL;
+        url=BaseURL;
     }
     @AfterMethod
     public void closeBrowser() {
         driver.quit();
     }
-    public void navigateToPage() {
-        driver.get(url);
+    public void navigateToPage(String BaseURL) {
+        driver.get(BaseURL);
     }
     public void provideEmail(String email) {
         WebElement emailField = driver.findElement(By.cssSelector("input[type='email']"));
