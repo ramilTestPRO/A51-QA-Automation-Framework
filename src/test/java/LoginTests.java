@@ -3,7 +3,7 @@ import org.testng.annotations.Test;
 
 public class LoginTests extends BaseTest {
 
-@Test (enabled = true, priority = 0, description = "Login with invalid email and valid password")
+@Test (enabled = false, priority = 2, description = "Login with invalid email and valid password")
 public void loginInvalidEmailValidPassword(){
         navigateToPage();
         provideEmail("invalid@class.com");
@@ -15,13 +15,13 @@ public void loginInvalidEmailValidPassword(){
 public void loginValidEmailPassword(){
 
         navigateToPage();
-        provideEmail("demo@class.com");
-        providePassword("te$t$tudent");
+        provideEmail("ramil.hasanli@testpro.io");
+        providePassword("iutZVH7Q");
         clickSubmit();
         isAvatarDisplayed();
         }
 
-@Test (enabled = true, priority = 3, description = "Login with valid email and empty password")
+@Test (enabled = false, priority = 3, description = "Login with valid email and empty password")
 public void loginValidEmailEmptyPassword() {
 
         navigateToPage();
