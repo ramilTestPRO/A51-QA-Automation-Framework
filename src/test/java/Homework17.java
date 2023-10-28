@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 
 public class Homework17 extends BaseTest{
 
-    // Click the first song in the search results
     public void searchSong(String name) throws InterruptedException {
         WebElement searchField =driver.findElement(By.cssSelector("input[type='search']"));
         searchField.sendKeys(name);
@@ -18,28 +17,29 @@ public class Homework17 extends BaseTest{
         Thread.sleep(2000);
     }
     public void selectFirstSongResult() throws InterruptedException {
-        WebElement firstSong = driver.findElement(By.xpath("//*[@id=\"mainContent\"]/comment()[2]"));
+        WebElement firstSong = driver.findElement(By.xpath("//section[@id='songResultsWrapper']//tr[@class='song-item'][1]"));
         firstSong.click();
         Thread.sleep(2000);
     }
-    public void clickAddToBottom() throws InterruptedException {
-        WebElement addToBottom = driver.findElement(By.xpath("//*[@id=\"songResultsWrapper\"]/header/div[3]/span/button[2]"));
-        addToBottom.click();
+    public void clickAddToButton() throws InterruptedException {
+        WebElement addToButton = driver.findElement(By.xpath("//*[@id=\"songResultsWrapper\"]/header/div[3]/span/button[2]"));
+        addToButton.click();
         Thread.sleep(2000);
     }
     public void choosePlayList() throws InterruptedException {
-        WebElement myPlayList = driver.findElement(By.cssSelector("#songResultsWrapper > header > div.song-list-controls > div > section.existing-playlists > ul > li.playlist"));
+        WebElement myPlayList = driver.findElement(By.xpath("/html/body/div[1]/div/div[1]/section[1]/section[11]/header/div[3]/div/section[1]/ul/li[5]"));
         myPlayList.click();
-        Thread.sleep(2000);
+        Thread.sleep(3000);
     }
     public String getAddToPlayListSuccessMsg()  {
-        WebElement notification = driver.findElement(By.xpath("//*[@id=\"songResultsWrapper\"]/header/div[3]/span/button[2]"));
+        WebElement notification = driver.findElement(By.cssSelector("div.success.show")); //css body > div.alertify-logs.top.right>div.success.show //xpath /html/body/div[4]/div
         return notification.getText();
+
 
     }
     @Test
     public void addSongToPlaylist() throws InterruptedException {
-        String expectedSongAddedMessage = "Added 1 song into \"MyPlayList\"";
+        String expectedSongAddedMessage = "Added 1 song into \"MyPlayList.\"";
         // Navigate to "https://qa.koel.app/"
         navigateToPage();
         // Log in with your credentials (replace 'your_username' and 'your_password' with your actual credentials)
@@ -50,9 +50,10 @@ public class Homework17 extends BaseTest{
        searchSong("Episode 2");
        clickViewAll();
        selectFirstSongResult();
-       clickAddToBottom();
+       clickAddToButton();
        choosePlayList();
         Assert.assertEquals(getAddToPlayListSuccessMsg(), expectedSongAddedMessage );
+        //driver.wait();
 
 
     }
