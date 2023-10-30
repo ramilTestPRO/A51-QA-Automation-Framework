@@ -2,18 +2,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 <suite name="TestNG">
-    <test name="LoginTests Tests" preserve-order="false">
+    <parameter name="BaseURL" value="https://qa.koel.app/"/>
+    <test name="Homework19 Tests" preserve-order="false">
         <classes>
-                        <class name="LoginTests">
-                <methods>
-                    <include name="loginValidEmailPassword" priority="1" />
-                </methods>
-            </class>
-                    </classes>
-    </test>
-    <test name="Homework18 Tests" preserve-order="false">
-        <classes>
-            <class name="Homework18"/>
+            <class name="Homework19"/>
         </classes>
     </test>
 </suite>

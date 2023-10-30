@@ -19,8 +19,8 @@ public class LoginTests extends BaseTest {
     public void loginValidEmailPassword(){
 
         navigateToPage();
-        provideEmail("demo@class.com");
-        providePassword("te$t$tudent");
+        provideEmail("ramil.hasanli@testpro.io");
+        providePassword("iutZVH7Q");
         clickSubmit();
         isAvatarDisplayed();
 
