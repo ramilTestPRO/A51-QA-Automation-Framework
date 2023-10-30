@@ -14,12 +14,12 @@ public class BaseTest {
     public WebDriver driver = null;
     public String url = null;
 
-//    @DataProvider (name="LoginData")
-//    public static Object[][] getDataFromDataProvider(){
-//        return new Object[][]{
-//                {"ramil.hasanli@testpro.io", "iutZVH7Q"}
-//        };
-//    }
+    @DataProvider (name="LoginData")
+    public static Object[][] getDataFromDataProvider(){
+        return new Object[][]{
+                {"ramil.hasanli@testpro.io", "iutZVH7Q"}
+        };
+    }
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();

@@ -22,16 +22,18 @@ public class Homework19 extends BaseTest{
         WebElement isMyPlaylistDeleted = driver.findElement(By.cssSelector("div.success.show"));
            Assert.assertTrue(isMyPlaylistDeleted.isDisplayed());
     }
-    @Test //(dataProvider ="LoginData", dataProviderClass = BaseTest.class,
-           // enabled = true, priority = 0, description = "Login with provided email and password")
-    public void deleteAndConfirm() throws InterruptedException {
+    @Test (dataProvider ="LoginData", dataProviderClass = BaseTest.class,
+           enabled = true, priority = 0, description = "Login with provided email and password")
+    // test logic here, using 'email' and 'password' for login
+    public void deleteAndConfirm(String email, String password) throws InterruptedException {
         String expectedPlaylistDeletedMessage = "Deleted playlist \"MyPlayList.\"";
         // Navigate to "https://qa.koel.app/"
         navigateToPage();
         // Log in with your credentials (replace 'your_username' and 'your_password' with your actual credentials)
-
-        provideEmail("ramil.hasanli@testpro.io");
-        providePassword("iutZVH7Q");
+        provideEmail(email);
+        providePassword(password);
+        //provideEmail("ramil.hasanli@testpro.io");
+        //providePassword("iutZVH7Q");
         clickSubmit();
         Thread.sleep(2000);
         chosePlaylistToDelete();
