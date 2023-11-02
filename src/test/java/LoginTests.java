@@ -1,5 +1,9 @@
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Instant;
 
 public class LoginTests extends BaseTest {
 
@@ -11,7 +15,9 @@ public class LoginTests extends BaseTest {
         providePassword("te$t$tudent");
         clickSubmit();
 
-        Thread.sleep(2000);
+//        Thread.sleep(2000);
+
+        wait.until(ExpectedConditions.urlToBe(url));
         Assert.assertEquals(driver.getCurrentUrl(), url); //https://qa.koel.app/
     }
 
@@ -34,8 +40,8 @@ public class LoginTests extends BaseTest {
         provideEmail("demo@class.com");
         providePassword("");
         clickSubmit();
-
-        Thread.sleep(2000);
+//        Thread.sleep(2000);
+        wait.until(ExpectedConditions.urlToBe(url));
         Assert.assertEquals(driver.getCurrentUrl(), url); //https://qa.koel.app/
     }
 

@@ -1,5 +1,6 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -7,19 +8,19 @@ import org.testng.annotations.Test;
 public class Homework19 extends BaseTest{
 
     public void chosePlaylistToDelete() throws InterruptedException {
-        WebElement choseMyPlaylistToDelete =driver.findElement(By.xpath("//*[@id=\"playlists\"]/ul/li[3]/a"));
+        WebElement choseMyPlaylistToDelete =wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"playlists\"]/ul/li[3]/a")));
         choseMyPlaylistToDelete.click();
         Thread.sleep(2000);
 
     }
     public void deletePlaylist() throws InterruptedException {
-        WebElement redButtonXPlaylist =driver.findElement(By.xpath("//*[@id=\"playlistWrapper\"]/header/div[3]/span/button"));
+        WebElement redButtonXPlaylist =wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"playlistWrapper\"]/header/div[3]/span/button")));
         redButtonXPlaylist.click();
         Thread.sleep(2000);
 
     }
           public void isPlaylistDeleted()  {
-        WebElement isMyPlaylistDeleted = driver.findElement(By.cssSelector("div.success.show"));
+        WebElement isMyPlaylistDeleted = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
            Assert.assertTrue(isMyPlaylistDeleted.isDisplayed());
     }
     @Test (dataProvider ="LoginData", dataProviderClass = BaseTest.class,
@@ -35,7 +36,7 @@ public class Homework19 extends BaseTest{
         //provideEmail("ramil.hasanli@testpro.io");
         //providePassword("iutZVH7Q");
         clickSubmit();
-        Thread.sleep(2000);
+//        Thread.sleep(2000);
         chosePlaylistToDelete();
         deletePlaylist();
         isPlaylistDeleted();
