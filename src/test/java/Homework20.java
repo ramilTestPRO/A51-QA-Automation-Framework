@@ -5,7 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 
-public class Homework19 extends BaseTest{
+public class Homework20 extends BaseTest{
 
     public void chosePlaylistToDelete() throws InterruptedException {
         WebElement choseMyPlaylistToDelete =wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"playlists\"]/ul/li[3]/a")));
