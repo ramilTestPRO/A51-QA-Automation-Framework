@@ -1,11 +1,19 @@
+import pages.HomePage;
+import pages.LoginPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Instant;
 
 public class LoginTests extends BaseTest {
+
+    public void loginValidEmailPasswordTest            (){
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+
+        loginPage.provideEmail("ramil.hasanli@testpro.io");
+        loginPage.providePassword("iutZVH7Q");
+        loginPage.clickSubmit();
+    }
 
     @Test (enabled = false, priority = 2, description = "Login with invalid email and valid password")
     public void loginInvalidEmailValidPassword() throws InterruptedException {
