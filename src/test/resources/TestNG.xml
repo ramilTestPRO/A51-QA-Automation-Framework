@@ -6,6 +6,7 @@
     <test name="Homework20 Tests" preserve-order="false">
         <classes>
             <class name="LoginTests"/>
+            <class name="Homework20"/>
         </classes>
     </test>
 </suite>

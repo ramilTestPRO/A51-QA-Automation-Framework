@@ -7,16 +7,16 @@ import org.testng.annotations.Test;
 
 public class Homework20 extends BaseTest{
 
-    public void chosePlaylistToDelete() throws InterruptedException {
+    public void chosePlaylistToDelete()  { //throws InterruptedException
         WebElement choseMyPlaylistToDelete =wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"playlists\"]/ul/li[3]/a")));
         choseMyPlaylistToDelete.click();
-        Thread.sleep(2000);
+//        Thread.sleep(2000);
 
     }
-    public void deletePlaylist() throws InterruptedException {
+    public void deletePlaylist()  { //throws InterruptedException
         WebElement redButtonXPlaylist =wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"playlistWrapper\"]/header/div[3]/span/button")));
         redButtonXPlaylist.click();
-        Thread.sleep(2000);
+//        Thread.sleep(2000);
 
     }
           public void isPlaylistDeleted()  {

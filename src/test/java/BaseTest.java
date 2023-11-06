@@ -16,7 +16,7 @@ import java.util.UUID;
 public class BaseTest {
     public WebDriver driver = null;
     public String url = null;
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    WebDriverWait wait = null;
     @DataProvider (name="LoginData")
     public static Object[][] getDataFromDataProvider(){
         return new Object[][]{
@@ -37,7 +37,7 @@ public class BaseTest {
         driver = new ChromeDriver(options);
 //        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
-        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+        wait = new WebDriverWait(driver,Duration.ofSeconds(10));
         url=BaseURL;
         navigateToPage();
     }
@@ -49,34 +49,32 @@ public class BaseTest {
                 driver.get(url);
     }
     public void provideEmail(String email) {
-        WebElement emailField = driver.findElement(By.cssSelector("input[type='email']"));
+        WebElement emailField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='email']")));
         emailField.clear();
         emailField.sendKeys(email);
     }
     public void providePassword(String password) {
-        WebElement passwordField = driver.findElement(By.cssSelector("input[type='password']"));
+        WebElement passwordField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='password']")));
         passwordField.clear();
         passwordField.sendKeys(password);
     }
     public void clickSubmit() {
-        WebElement submit = driver.findElement(By.cssSelector("button[type='submit']"));
+        WebElement submit = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button[type='submit']")));
         submit.click();
     }
-    public void clickAvatarIcon() {
-        WebElement avatarIcon = driver.findElement(By.cssSelector("img.avatar"));
-        avatarIcon.click();
+    public void clickSaveButton() {
+        WebElement saveButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button.btn-submit")));
+        saveButton.click();
     }
+
     public void provideCurrentPassword(String password) {
-        WebElement currentPassword = driver.findElement(By.cssSelector("[name='current_password']"));
+        WebElement currentPassword = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name='current_password']")));
         currentPassword.clear();
         currentPassword.sendKeys(password);
     }
-    public void clickSaveButton() {
-        WebElement saveButton = driver.findElement(By.cssSelector("button.btn-submit"));
-        saveButton.click();
-    }
+
     public void provideProfileName(String randomName) {
-        WebElement profileName = driver.findElement(By.cssSelector("[name='name']"));
+        WebElement profileName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name='name']")));
         profileName.clear();
         profileName.sendKeys(randomName);
     }
@@ -84,8 +82,12 @@ public class BaseTest {
         return UUID.randomUUID().toString().replace("-", "");
     }
 
+    public void clickAvatarIcon() {
+        WebElement avatarIcon = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img.avatar")));
+        avatarIcon.click();
+    }
     public void isAvatarDisplayed() {
-        WebElement avatarIcon = driver.findElement(By.cssSelector("img[class='avatar']"));
+        WebElement avatarIcon = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img[class='avatar']")));
         Assert.assertTrue(avatarIcon.isDisplayed());
     }
 }
