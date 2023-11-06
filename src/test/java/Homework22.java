@@ -6,7 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 
-public class Homework21 extends BaseTest{
+public class Homework22 extends BaseTest{
 
     public void chosePlaylistToRename()  {
         WebElement choseMyPlaylistToRename =wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"playlists\"]/ul/li[3]/a")));
@@ -38,11 +38,11 @@ public void typeNewName(){
         // Navigate to "https://qa.koel.app/"
         navigateToPage();
         // Log in with your credentials (replace 'your_username' and 'your_password' with your actual credentials)
-        provideEmail(email);
-        providePassword(password);
+//        provideEmail(email);
+//        providePassword(password);
         //provideEmail("ramil.hasanli@testpro.io");
         //providePassword("iutZVH7Q");
-        clickSubmit();
+//        clickSubmit();
 //        Thread.sleep(2000);
         chosePlaylistToRename();
         clickOnEdit();
