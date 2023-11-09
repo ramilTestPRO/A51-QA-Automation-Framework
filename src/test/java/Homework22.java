@@ -15,14 +15,18 @@ public class Homework22 extends BaseTest{
 
     public void renamePlaylist() {
 
+        String newPlaylistName = "MyNewPlayList";
+        String updatedPlaylistMsg = "Updated playlist\"MyNewPlayList\"";
+        LoginPage loginPage= new LoginPage(driver);
         HomePage homePage =new HomePage(driver);
 
+        loginPage.login();
         homePage.chosePlaylistToRename();
         homePage.clickOnEdit();
         homePage.clearOldName();
         homePage.typeNewName();
 
-        Assert.assertTrue(homePage.isPlaylistRenamed().isDisplayed());
+        Assert.assertEquals(homePage.isPlaylistRenamed(), updatedPlaylistMsg);
 
 
     }
