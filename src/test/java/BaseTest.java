@@ -18,6 +18,7 @@ import org.testng.annotations.*;
 
 import java.lang.reflect.MalformedParametersException;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.time.Duration;
 import java.util.UUID;
@@ -41,7 +42,7 @@ public class BaseTest {
 
     @BeforeMethod
     @Parameters({"BaseURL"})
-    public void launchBrowser(String BaseURL) throws MalformedURLException {
+    public void launchBrowser(String BaseURL) throws MalformedURLException { //if URL "http://10.0.0.206:4444" has mistake
         //Added ChromeOptions argument below to fix websocket error
 //        ChromeOptions options = new ChromeOptions();
 //        options.addArguments("--remote-allow-origins=*");
@@ -55,7 +56,7 @@ public class BaseTest {
         url=BaseURL;
         navigateToPage();
     }
-    public static WebDriver pickBrowser(String browser){
+    public static WebDriver pickBrowser(String browser) throws MalformedURLException {
         DesiredCapabilities caps=new DesiredCapabilities();
         String gridURL= "http://10.0.0.206:4444";
         switch (browser){
@@ -69,7 +70,7 @@ public class BaseTest {
                 return driver = new EdgeDriver(edgeOptions);
             case "grid-edge": //gradle clean test -Dbrowser=grid-edge
                 caps.setCapability("browser", "MicrosoftEdge");
-                return driver = new RemoteWebDriver(URL.create(gridURL).toURL().caps);
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(),caps);
             default:
                 WebDriverManager.chromedriver().setup();
                 ChromeOptions options=new ChromeOptions();
