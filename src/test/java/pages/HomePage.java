@@ -10,18 +10,15 @@ public class HomePage extends BasePage{
         public HomePage(WebDriver givenDriver){
         super(givenDriver);
     }
-    private By myPlayList = By.xpath("//*[@id=\"playlists\"]/ul/li[3]/a");
-//    By clickEdit = By.xpath("//*[@id=\"playlists\"]/ul/li[3]/nav/ul/li[1]");
+ /*    By myPlayList = By.xpath("//*[@id=\"playlists\"]/ul/li[3]/a");
+
   By textField = By.cssSelector(" [name = 'name']");
-//    By newName = By.cssSelector(" [name = 'name']");
+
   By playlistRenamedMsg = By.cssSelector("div.success.show");
     public void chosePlaylistToRename()  {
         doubleClick(myPlayList);
     }
 
-//    public void clickOnEdit()  {
-//        findElement(clickEdit).click();
-//    }
 
     public void enterNewPlaylistName(String playlistNewName)  {
        findElement (textField).sendKeys(Keys.chord(Keys.CONTROL, "A", Keys.BACK_SPACE));
@@ -35,11 +32,8 @@ public class HomePage extends BasePage{
            }
 
 
-
-
-
     By userAvatarIcon = By.cssSelector("img.avatar");
     public WebElement getUserAvatar(){
         return findElement(userAvatarIcon);
-    }
+    }*/
 }
