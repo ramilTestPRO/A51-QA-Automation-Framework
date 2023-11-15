@@ -10,11 +10,11 @@ public class HomePage extends BasePage{
         public HomePage(WebDriver givenDriver){
         super(givenDriver);
     }
-    By myPlayList = By.xpath("//*[@id=\"playlists\"]/ul/li[3]/a");
+    private By myPlayList = By.xpath("//*[@id=\"playlists\"]/ul/li[3]/a");
 //    By clickEdit = By.xpath("//*[@id=\"playlists\"]/ul/li[3]/nav/ul/li[1]");
-    By textField = By.cssSelector(" [name = 'name']");
+  By textField = By.cssSelector(" [name = 'name']");
 //    By newName = By.cssSelector(" [name = 'name']");
-    By playlistRenamedMsg = By.cssSelector("div.success.show");
+  By playlistRenamedMsg = By.cssSelector("div.success.show");
     public void chosePlaylistToRename()  {
         doubleClick(myPlayList);
     }
