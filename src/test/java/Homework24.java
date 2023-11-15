@@ -4,14 +4,13 @@ import page_factory.HomePage;
 import page_factory.LoginPage;
 
 
-public class Homework23 extends BaseTest{
+public class Homework24 extends BaseTest{
 
     @Test
 
     public void renamePlaylist() {
 
         String newPlaylistName = "TestPro PlayList";
-        String updatedPlaylistMsg = "TestPro PlayList";
         page_factory.LoginPage loginPage= new LoginPage(driver);
         HomePage homePage =new page_factory.HomePage(driver);
 
