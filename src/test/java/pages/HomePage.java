@@ -11,28 +11,27 @@ public class HomePage extends BasePage{
         super(givenDriver);
     }
     By myPlayList = By.xpath("//*[@id=\"playlists\"]/ul/li[3]/a");
-    By clickEdit = By.xpath("//*[@id=\"playlists\"]/ul/li[3]/nav/ul/li[1]");
+//    By clickEdit = By.xpath("//*[@id=\"playlists\"]/ul/li[3]/nav/ul/li[1]");
     By textField = By.cssSelector(" [name = 'name']");
-    By newName = By.cssSelector(" [name = 'name']");
-    By playlistRenamed = By.cssSelector("div.success.show");
+//    By newName = By.cssSelector(" [name = 'name']");
+    By playlistRenamedMsg = By.cssSelector("div.success.show");
     public void chosePlaylistToRename()  {
-        actions.contextClick(findElement(myPlayList)).perform();
+        doubleClick(myPlayList);
     }
 
-    public void clickOnEdit()  {
-        findElement(clickEdit).click();
-    }
+//    public void clickOnEdit()  {
+//        findElement(clickEdit).click();
+//    }
 
-    public void clearOldName()  {
+    public void enterNewPlaylistName(String playlistNewName)  {
        findElement (textField).sendKeys(Keys.chord(Keys.CONTROL, "A", Keys.BACK_SPACE));
+        findElement(textField).sendKeys(playlistNewName);
+        findElement(textField).sendKeys(Keys.ENTER);
     }
 
-    public void typeNewName(){
-        findElement(newName).sendKeys("MyNewPlayList", Keys.ENTER);
-    }
 
     public String isPlaylistRenamed()  {
-        return findElement(playlistRenamed).getText();
+        return findElement(playlistRenamedMsg).getText();
            }
 
 

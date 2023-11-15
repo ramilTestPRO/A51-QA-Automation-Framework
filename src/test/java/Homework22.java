@@ -10,21 +10,19 @@ import pages.LoginPage;
 
 public class Homework22 extends BaseTest{
 
-    @Test (dataProvider ="LoginData", dataProviderClass = BaseTest.class,
-           enabled = true, priority = 0, description = "Login with provided email and password")
+    @Test
+//            (dataProvider ="LoginData", dataProviderClass = BaseTest.class, enabled = true, priority = 0, description = "Login with provided email and password")
 
     public void renamePlaylist() {
 
-        String newPlaylistName = "MyNewPlayList";
-        String updatedPlaylistMsg = "Updated playlist\"MyNewPlayList\"";
+        String newPlaylistName = "TestPro PlayList";
+        String updatedPlaylistMsg = "Updated playlist\"TestPro PlayList.\"";
         LoginPage loginPage= new LoginPage(driver);
         HomePage homePage =new HomePage(driver);
 
         loginPage.login();
         homePage.chosePlaylistToRename();
-        homePage.clickOnEdit();
-        homePage.clearOldName();
-        homePage.typeNewName();
+        homePage.enterNewPlaylistName(newPlaylistName);
 
         Assert.assertEquals(homePage.isPlaylistRenamed(), updatedPlaylistMsg);
 
