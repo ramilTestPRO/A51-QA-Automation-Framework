@@ -4,7 +4,7 @@ import page_factory.HomePage;
 import page_factory.LoginPage;
 
 
-public class Homework24 extends BaseTest{
+public class Homework25 extends BaseTest{
 
     @Test
 

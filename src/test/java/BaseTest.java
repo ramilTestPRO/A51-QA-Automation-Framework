@@ -22,12 +22,13 @@ public class BaseTest {
     public static WebDriverWait wait = null;
     public static Actions actions = null;
 
-    @DataProvider (name="LoginData")
-    public static Object[][] getDataFromDataProvider(){
+    @DataProvider(name = "LoginData")
+    public static Object[][] getDataFromDataProvider() {
         return new Object[][]{
                 {"ramil.hasanli@testpro.io", "iutZVH7Q"}
         };
     }
+
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
@@ -47,23 +48,13 @@ public class BaseTest {
         url = BaseURL;
         navigateToPage();
     }
- /*   public void launchBrowser(String BaseURL) {
-        //      Added ChromeOptions argument below to fix websocket error
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-        driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        actions = new Actions(driver);
-        url = BaseURL;
-        navigateToPage();
-    }*/
-    @AfterMethod
+
+       @AfterMethod
     public void closeBrowser() {
         driver.quit();
     }
-    public  void navigateToPage() {
+
+    public void navigateToPage() {
         driver.get(url);
     }
 
@@ -73,19 +64,7 @@ public class BaseTest {
 
         // in PowerShell/CMD run java -jar selenium-server-4.15.0.jar standalone --selenium-manager true
 
-        // Log the value of gridURL for debugging
-        System.out.println("gridURL: " + gridURL);
-
-       /* if (browser == null) {
-            // Handle the case when browser is null
-            System.out.println("Browser is null. Defaulting to Chrome.");
-            WebDriverManager.chromedriver().setup();
-            ChromeOptions chromeOptions = new ChromeOptions();
-            chromeOptions.addArguments("--remote-allow-origins=*");
-            return driver = new ChromeDriver(chromeOptions);
-        }*/
-
-        switch(browser) {
+        switch (browser) {
             case "firefox": // gradle clean test -Dbrowser=firefox
                 WebDriverManager.firefoxdriver().setup();
                 return driver = new FirefoxDriver();
@@ -114,4 +93,5 @@ public class BaseTest {
                 chromeOptions.addArguments("--remote-allow-origins=*");
                 return driver = new ChromeDriver(chromeOptions);
         }
-}}
+    }
+}
