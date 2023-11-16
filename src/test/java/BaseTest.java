@@ -21,10 +21,10 @@ import java.util.HashMap;
 
 public class BaseTest {
 
-    public static RemoteWebDriver driver = null;
-    public static String url = null;
-    public static WebDriverWait wait = null;
-    public static Actions actions = null;
+    protected static RemoteWebDriver driver;
+    protected String url = null;
+    protected WebDriverWait wait;
+    protected Actions actions = null;
 
     public static final ThreadLocal<WebDriver> threadDriver = new ThreadLocal<WebDriver>();
 
@@ -81,6 +81,7 @@ public class BaseTest {
         ltOptions.put("w3c", true);
         ltOptions.put("plugin", "java-testNG");
         browserOptions.setCapability("LT:Options", ltOptions);
+
 
         return new RemoteWebDriver(new URL(hubURL), browserOptions);
     }
