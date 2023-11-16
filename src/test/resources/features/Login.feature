@@ -21,4 +21,4 @@ Feature: Login feature
       | email                    |password|
       | ramil.hasanli@testpro.io |iutZVH7Q|
       | ramil.hasanli@testpro.io |S0000rT |
-      | ramil.hasanli@testpro.io |        | 
+      | ramil.hasanli@testpro.io |        |
