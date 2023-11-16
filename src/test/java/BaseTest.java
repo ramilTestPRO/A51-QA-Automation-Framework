@@ -66,7 +66,7 @@ public class BaseTest {
         driver.get(url);
     }
 
-    WebDriver setupLambda() throws MalformedURLException {
+    static WebDriver setupLambda() throws MalformedURLException {
         String hubURL ="https://hub.lambdatest.com/wd/hub";
         ChromeOptions browserOptions = new ChromeOptions();
         browserOptions.setPlatformName("Windows 10");
@@ -113,7 +113,7 @@ public class BaseTest {
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
 
                    case "cloud": // gradle clean test -Dbrowser=grid-cloud
-                       return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
+                       return setupLambda();
 
             default:
                 WebDriverManager.chromedriver().setup();
