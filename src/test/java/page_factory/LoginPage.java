@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.testng.annotations.Test;
 
 public class LoginPage extends BasePage {
-    public LoginPage(RemoteWebDriver givenDriver){
+    public LoginPage(WebDriver givenDriver){
         super(givenDriver);
     }
     @FindBy(css = "input[type='email']")

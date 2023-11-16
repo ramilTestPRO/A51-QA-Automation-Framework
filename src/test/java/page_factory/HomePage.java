@@ -19,7 +19,7 @@ public class HomePage extends BasePage {
     @FindBy(css = "div.success.show")
     WebElement popUpNotification;
 
-    public HomePage(RemoteWebDriver givenDriver) {
+    public HomePage(WebDriver givenDriver) {
         super(givenDriver);
     }
 
