@@ -72,7 +72,7 @@ public class BaseTest {
         return threadDriver.get();
     }
 
-    public static WebDriver lambdaTest() throws MalformedURLException {
+    public static RemoteWebDriver lambdaTest() throws MalformedURLException {
         String hubURL="https://hub.lambdatest.com/wd/hub";
 
         FirefoxOptions browserOptions = new FirefoxOptions();
