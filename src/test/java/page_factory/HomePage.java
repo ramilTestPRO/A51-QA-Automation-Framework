@@ -1,10 +1,8 @@
 package page_factory;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
 
 public class HomePage extends BasePage {
@@ -24,17 +22,15 @@ public class HomePage extends BasePage {
     }
 
     //Fluent interface
-    public HomePage doubleClickPlaylist() {
+    public void doubleClickPlaylist() {
         doubleClick(firstPlaylist);
-        return this;
     }
-    public HomePage enterNewPlaylistName(String playlistName) {
+    public void enterNewPlaylistName(String playlistName) {
         findElement(playlistNameField).sendKeys(playlistName);
         findElement(playlistNameField).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.BACK_SPACE));
         findElement(playlistNameField).sendKeys(playlistName);
         findElement(playlistNameField).sendKeys(Keys.ENTER);
         findElement(popUpNotification);//wait for the popup notification for successful updating of the playlist name
-        return this;
     }
 
     //Changed the approach for assert

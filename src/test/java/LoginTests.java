@@ -1,7 +1,7 @@
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import page_factory.LoginPage;
-import pages.HomePage;
+import page_factory.LoginPage;
 
 public class LoginTests extends BaseTest {
 

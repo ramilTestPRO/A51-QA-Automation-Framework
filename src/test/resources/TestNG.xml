@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Test Pro Parallel Testing" parallel="methods" thread-count="2">
+<suite name="Test Pro Parallel Testing" parallel="methods" thread-count="4">
+    <!--    Here the <suite> element is created, which serves as a container for test sets. -->
+    <!--    It has attributes like name (suite name), parallel (test execution mode) -->
+    <!--    and thread-count (number of threads for parallel execution).-->
     <parameter name="BaseURL" value="https://qa.koel.app/"/>
     <test name="Homework25 Tests" preserve-order="false">
         <classes>
             <class name="LoginTests"/>
-            <class name="Homework25"/>
-        </classes>
-    </test>
-</suite>
+            <!--    <class name="Homework25"/>-->
+           </classes>
+       </test>
+   </suite>
+           <!--        The XML file defines a test set (LoginTests) with a baseURL parameter. -->
+        <!--        When you run this file using TestNG, the tests from the specified class will be executed, -->
+        <!--        and the class will have access to the baseURL parameter.-->
+
+
+
