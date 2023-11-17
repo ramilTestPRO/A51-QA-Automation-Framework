@@ -13,10 +13,19 @@ dependencies {
     testImplementation 'org.testng:testng:7.6.1'
     implementation 'org.seleniumhq.selenium:selenium-java:4.5.0'
     testImplementation 'io.github.bonigarcia:webdrivermanager:5.4.1'
+
+    // https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml
+    implementation 'org.apache.poi:poi-ooxml:5.2.3'
+    implementation 'org.apache.logging.log4j:log4j-api:2.21.1'
+    implementation 'org.apache.logging.log4j:log4j-core:2.21.1'
 }
 
 test {
     useTestNG() {
         suites "src/test/resources/TestNG.xml"
+        systemProperty "browser", System.getProperty("browser")
+        //suites "src/test/resources/Smoke.xml"
+        //suites "src/test/resources/Regression.xml"
+
     }
 }
