@@ -69,7 +69,7 @@ public class BaseTest {
 
     public static WebDriver pickBrowser(String browser) throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
-        String gridURL = "http://10.1.8.115:4444"; // http://localhost:4444/grid/console
+        String gridURL = "http://192.168.0.20:4444/wd/hub"; // http://10.1.8.115:4444  http://localhost:4444/grid/console
 
         // in PowerShell/CMD run java -jar selenium-server-4.15.0.jar standalone --selenium-manager true
 
