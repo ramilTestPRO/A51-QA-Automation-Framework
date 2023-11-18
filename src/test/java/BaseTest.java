@@ -1,5 +1,5 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
-// import org.apache.poi.ss.formula.atp.Switch;
+import org.apache.poi.ss.formula.atp.Switch;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -35,113 +35,89 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.Map;
 
-//import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-//import org.apache.poi.xssf.usermodel.XSSFSheet;
-//import org.apache.poi.xssf.usermodel.XSSFRow;
-//import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+
 public class BaseTest {
-    @DataProvider(name="LoginData")
-    public Object[][] getDataFromDataProvider(){
+    public static WebDriver driver = null;
+    public static String url = null;
+    public static WebDriverWait wait = null;
+    public static Actions actions = null;
+    // modified by Ramil
+
+    @DataProvider (name="LoginData")
+    public static Object[][] getDataFromDataProvider(){
         return new Object[][]{
-                {"akansha.shukla@testpro.io", "te$t$tudent"},
-                {"invalidemail@class.com", "te$t$tudent"},
-                {"demo@class.com", "InvalidPassword"},
-                {"",""}
+                {"akansha.shukla@testpro.io", "te$t$tudent"}
         };
     }
-
- /*   @DataProvider(name="excel-data")
-    public Object[][] excelDP() throws IOException {
-        Object [][] arrObj;
-        //Object[][] arrObj = getExcelData("./src/test/resources/test.xlsx", "test.xlsx");
-        arrObj = getExcelData("./src/test/resources/test.xlsx", "Sheet1");
-        return arrObj;
-    }*/
-
-    // DataProviders End here
-
-    //References start here
-
-
-    public static WebDriver driver;
-    public String url = "https://qa.koel.app";
-
-    public WebDriverWait wait;
-    Actions actions;
     @BeforeSuite
     static void setupClass() {
-        // WebDriverManager.chromedriver().setup();
-        //WebDriverManager.firefoxdriver().setup();
-
+        WebDriverManager.chromedriver().setup();
     }
 
     @BeforeMethod
     @Parameters({"BaseURL"})
-    // public void launchBrowser(String BaseURL) throws MalformedURLException {
-    // ChromeOptions options = new ChromeOptions();
-    // options.addArguments("--remote-allow-origins=*");
-    //driver = new ChromeDriver(options);
     public void launchBrowser(String BaseURL) throws MalformedURLException {
+
         driver = pickBrowser(System.getProperty("browser"));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10)); // added by Ramil
+        driver.manage().window().maximize();
+
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         actions = new Actions(driver);
-        driver.manage().window().maximize();
-        navigateToLoginPage(BaseURL);
 
+        url = BaseURL; // added by Ramil
+        navigateToLoginPage(); // modified by Ramil
     }
+
+    @AfterMethod
+    public void closeBrowser() {
+        driver.quit();
+    }
+    public  void navigateToLoginPage() {
+        driver.get(url);
+    }
+
     public static WebDriver pickBrowser(String browser) throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
-        String gridURL = "http://10.1.8.115:4444"; // http://localhost:4444/grid/console
+        String gridUrl = "http://192.168.0.20:4444/wd/hub";
+        URI uri = URI.create(gridUrl); // modified by Ramil
 
-        switch (browser) {
+        // in PowerShell/CMD run java -jar selenium-server-4.15.0.jar standalone --selenium-manager true
 
-            case "firefox":
+        switch(browser) {
+            case "firefox": // gradle clean test -Dbrowser=firefox
                 WebDriverManager.firefoxdriver().setup();
                 return driver = new FirefoxDriver();
-            case "MicrosoftEdge":
+
+            case "MicrosoftEdge": // gradle clean test -Dbrowser=MicrosoftEdge
                 WebDriverManager.edgedriver().setup();
                 EdgeOptions edgeOptions = new EdgeOptions();
                 edgeOptions.addArguments("--remote-allow-origins=*");
                 return driver = new EdgeDriver(edgeOptions);
-            //Selenium Grid
+
             case "grid-edge": // gradle clean test -Dbrowser=grid-edge
-                caps.setCapability("browser", "MicrosoftEdge");
-                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(),caps);
+                caps.setCapability("browserName", "MicrosoftEdge");
+                return driver = new RemoteWebDriver(uri.toURL(), caps); // modified by Ramil
 
             case "grid-firefox": // gradle clean test -Dbrowser=grid-firefox
-                caps.setCapability("browser", "firefox");
-                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
-
+                caps.setCapability("browserName", "firefox");
+                return driver = new RemoteWebDriver(uri.toURL(), caps); // modified by Ramil
 
             case "grid-chrome": // gradle clean test -Dbrowser=grid-chrome
-                caps.setCapability("browser", "chrome");
-                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
+                caps.setCapability("browserName", "chrome");
+                return driver = new RemoteWebDriver(uri.toURL(), caps); // modified by Ramil
 
             default:
                 WebDriverManager.chromedriver().setup();
-                ChromeOptions options = new ChromeOptions();
-                options.addArguments("--remote-allow-origins=*");
-                driver = new ChromeDriver(options);
-                return driver = new ChromeDriver(options);
-
+                ChromeOptions chromeOptions = new ChromeOptions();
+                chromeOptions.addArguments("--remote-allow-origins=*");
+                return driver = new ChromeDriver(chromeOptions);
         }
-
     }
-
-    @AfterMethod
-    public void closeBrowser(){
-        driver.quit();
-    }
-
-
-    public void navigateToLoginPage () {
-        driver.get(url);
-    }
-
-    public void navigateToLoginPage (String BaseURL){
-        driver.get(BaseURL);
-    }
-
     public void provideEmail (String email){
         WebElement emailField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='email']")));
         //WebElement emailField = driver.findElement(By.cssSelector("input[type='email']"));
@@ -161,7 +137,7 @@ public class BaseTest {
         WebElement submit = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button[type='submit']")));
         submit.click();
     }
-    /*public String[][] getExcelData (String fileName, String sheetName){
+    public String[][] getExcelData (String fileName, String sheetName){
         String[][] data = null;
         try {
             FileInputStream fileInputStream = new FileInputStream(fileName);
@@ -183,6 +159,8 @@ public class BaseTest {
             System.out.println("Something went wrong." + e);
         }
         return data;
-    }*/
+    }
+
+
 
 }
