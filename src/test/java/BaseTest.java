@@ -22,12 +22,13 @@ public class BaseTest {
     public static WebDriverWait wait = null;
     public static Actions actions = null;
 
-    @DataProvider (name="LoginData")
-    public static Object[][] getDataFromDataProvider(){
+    @DataProvider(name = "LoginData")
+    public static Object[][] getDataFromDataProvider() {
         return new Object[][]{
                 {"ramil.hasanli@testpro.io", "iutZVH7Q"}
         };
     }
+
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
@@ -47,23 +48,25 @@ public class BaseTest {
         url = BaseURL;
         navigateToPage();
     }
- /*   public void launchBrowser(String BaseURL) {
-        //      Added ChromeOptions argument below to fix websocket error
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-        driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        actions = new Actions(driver);
-        url = BaseURL;
-        navigateToPage();
-    }*/
+
+    /*   public void launchBrowser(String BaseURL) {
+           //      Added ChromeOptions argument below to fix websocket error
+           ChromeOptions options = new ChromeOptions();
+           options.addArguments("--remote-allow-origins=*");
+           driver = new ChromeDriver(options);
+           driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+           driver.manage().window().maximize();
+           wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+           actions = new Actions(driver);
+           url = BaseURL;
+           navigateToPage();
+       }*/
     @AfterMethod
     public void closeBrowser() {
         driver.quit();
     }
-    public  void navigateToPage() {
+
+    public void navigateToPage() {
         driver.get(url);
     }
 
@@ -85,16 +88,10 @@ public class BaseTest {
             return driver = new ChromeDriver(chromeOptions);
         }*/
 
-        switch(browser) {
-//            case "firefox": // gradle clean test -Dbrowser=firefox
-//                WebDriverManager.firefoxdriver().setup();
-//                return driver = new FirefoxDriver();
-            case "chrome": // gradle clean test -Dbrowser=chrome
-                WebDriverManager.chromedriver().setup();
-                ChromeOptions chromeOptions = new ChromeOptions();
-                chromeOptions.addArguments("--remote-allow-origins=*");
-                return driver = new ChromeDriver(chromeOptions);
-
+        switch (browser) {
+            case "firefox": // gradle clean test -Dbrowser=firefox
+                WebDriverManager.firefoxdriver().setup();
+                return driver = new FirefoxDriver();
             case "MicrosoftEdge": // gradle clean test -Dbrowser=MicrosoftEdge
                 WebDriverManager.edgedriver().setup();
                 EdgeOptions edgeOptions = new EdgeOptions();
@@ -114,12 +111,12 @@ public class BaseTest {
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
 
             default:
-//                WebDriverManager.chromedriver().setup();
-//                ChromeOptions chromeOptions = new ChromeOptions();
-//                chromeOptions.addArguments("--remote-allow-origins=*");
-//                return driver = new ChromeDriver(chromeOptions);
-                WebDriverManager.firefoxdriver().setup();
-                return driver = new FirefoxDriver();
+                WebDriverManager.chromedriver().setup();
+                ChromeOptions chromeOptions = new ChromeOptions();
+                chromeOptions.addArguments("--remote-allow-origins=*");
+                return driver = new ChromeDriver(chromeOptions);
+
         }
 
-    }}
+    }
+}
