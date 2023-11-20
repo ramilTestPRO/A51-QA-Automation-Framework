@@ -86,9 +86,14 @@ public class BaseTest {
         }*/
 
         switch(browser) {
-            case "firefox": // gradle clean test -Dbrowser=firefox
-                WebDriverManager.firefoxdriver().setup();
-                return driver = new FirefoxDriver();
+//            case "firefox": // gradle clean test -Dbrowser=firefox
+//                WebDriverManager.firefoxdriver().setup();
+//                return driver = new FirefoxDriver();
+            case "chrome": // gradle clean test -Dbrowser=chrome
+                WebDriverManager.chromedriver().setup();
+                ChromeOptions chromeOptions = new ChromeOptions();
+                chromeOptions.addArguments("--remote-allow-origins=*");
+                return driver = new ChromeDriver(chromeOptions);
 
             case "MicrosoftEdge": // gradle clean test -Dbrowser=MicrosoftEdge
                 WebDriverManager.edgedriver().setup();
@@ -109,9 +114,12 @@ public class BaseTest {
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
 
             default:
-                WebDriverManager.chromedriver().setup();
-                ChromeOptions chromeOptions = new ChromeOptions();
-                chromeOptions.addArguments("--remote-allow-origins=*");
-                return driver = new ChromeDriver(chromeOptions);
+//                WebDriverManager.chromedriver().setup();
+//                ChromeOptions chromeOptions = new ChromeOptions();
+//                chromeOptions.addArguments("--remote-allow-origins=*");
+//                return driver = new ChromeDriver(chromeOptions);
+                WebDriverManager.firefoxdriver().setup();
+                return driver = new FirefoxDriver();
         }
-}}
+
+    }}
