@@ -29,7 +29,9 @@ dependencies {
 
 
 }
-
+ext {
+    suite = project.findProperty('suite')?: 'defaultSuiteName'
+}
 test {
     useTestNG() {
         suites "src/test/resources/${suite}.xml"
